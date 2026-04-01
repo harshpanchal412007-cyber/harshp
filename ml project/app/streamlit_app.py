@@ -1,22 +1,24 @@
 from __future__ import annotations
 
 import json
+import pickle
 from pathlib import Path
 
-import joblib
 import pandas as pd
 import streamlit as st
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MODEL_PATH = ROOT / "models" / "best_crop_yield_model.joblib"
+# Pickle avoids joblib import issues on Streamlit Cloud when deps install oddly.
+MODEL_PATH = ROOT / "models" / "best_crop_yield_model.pkl"
 METRICS_PATH = ROOT / "models" / "model_metrics.json"
 DATA_PATH = ROOT / "data" / "raw" / "sample_crop_yield_data.csv"
 
 
 @st.cache_resource
 def load_model():
-    return joblib.load(MODEL_PATH)
+    with open(MODEL_PATH, "rb") as f:
+        return pickle.load(f)
 
 
 def main() -> None:
@@ -27,7 +29,7 @@ def main() -> None:
     )
 
     if not MODEL_PATH.exists():
-        st.error("Model not found. Run: python src/train.py")
+        st.error("Model not found (best_crop_yield_model.pkl). Run: python src/train.py")
         st.stop()
 
     model = load_model()
