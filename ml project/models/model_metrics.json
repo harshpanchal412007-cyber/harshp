@@ -1,0 +1,25 @@
+{
+  "LinearRegression": {
+    "MAE": 658.888,
+    "RMSE": 804.029,
+    "R2": 0.715
+  },
+  "RandomForest": {
+    "MAE": 529.875,
+    "RMSE": 667.402,
+    "R2": 0.804
+  },
+  "XGBoost": {
+    "MAE": 643.476,
+    "RMSE": 862.596,
+    "R2": 0.672
+  },
+  "RandomForest_Tuned": {
+    "MAE": 605.74,
+    "RMSE": 776.925,
+    "R2": 0.734
+  },
+  "BestModel": {
+    "name": "RandomForest"
+  }
+}
